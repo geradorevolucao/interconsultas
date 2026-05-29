@@ -62,6 +62,23 @@
         #textoFinal { height: 500px; background-color: #f8f9fa; font-family: monospace; font-size: 14px; }
         .placeholder-box { text-align: center; padding: 40px 20px; background: white; border-radius: 12px; margin-top: 20px; color: #7f8c8d; }
         .resultado-calc { margin-top: 12px; padding: 12px; background-color: #e8f8f5; border-radius: 6px; font-weight: bold; color: #16a085; text-align: center; display: none; font-size: 16px;}
+
+        /* CSS DO MOTOR DE DITADO */
+        .btn-mic {
+            background-color: #28a745; color: white; border: none; border-radius: 4px;
+            padding: 4px 8px; font-size: 12px; font-weight: bold; cursor: pointer; margin-left: 8px;
+            display: inline-flex; align-items: center;
+        }
+        .btn-mic.gravando {
+            background-color: #dc3545; animation: pulsar 1.5s infinite;
+        }
+        @keyframes pulsar {
+            0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; }
+        }
+        .label-com-mic {
+            display: flex; align-items: center; justify-content: space-between; margin-top: 10px;
+        }
+        .label-com-mic label { margin-top: 0; }
     </style>
 </head>
 <body>
@@ -246,45 +263,23 @@
         </div>
     </div>
                 
-<div id="e-news" class="screen">
+    <div id="e-news" class="screen">
         <div class="card">
             <h2>Escore NEWS (Deterioração Clínica)</h2>
-            
             <label>Frequência Respiratória (irpm)</label>
-            <select id="news_fr" class="sel-news">
-                <option value="3">≤ 8</option><option value="1">9 - 11</option><option value="0" selected>12 - 20</option><option value="2">21 - 24</option><option value="3">≥ 25</option>
-            </select>
-
+            <select id="news_fr" class="sel-news"><option value="3">≤ 8</option><option value="1">9 - 11</option><option value="0" selected>12 - 20</option><option value="2">21 - 24</option><option value="3">≥ 25</option></select>
             <label>Saturação de O2 (%)</label>
-            <select id="news_spo2" class="sel-news">
-                <option value="3">≤ 91</option><option value="2">92 - 93</option><option value="1">94 - 95</option><option value="0" selected>≥ 96</option>
-            </select>
-
+            <select id="news_spo2" class="sel-news"><option value="3">≤ 91</option><option value="2">92 - 93</option><option value="1">94 - 95</option><option value="0" selected>≥ 96</option></select>
             <label>Uso de O2 Suplementar?</label>
-            <select id="news_o2" class="sel-news">
-                <option value="0" selected>Não (Ar ambiente)</option><option value="2">Sim</option>
-            </select>
-
+            <select id="news_o2" class="sel-news"><option value="0" selected>Não (Ar ambiente)</option><option value="2">Sim</option></select>
             <label>PA Sistólica (mmHg)</label>
-            <select id="news_pas" class="sel-news">
-                <option value="3">≤ 90</option><option value="2">91 - 100</option><option value="1">101 - 110</option><option value="0" selected>111 - 219</option><option value="3">≥ 220</option>
-            </select>
-
+            <select id="news_pas" class="sel-news"><option value="3">≤ 90</option><option value="2">91 - 100</option><option value="1">101 - 110</option><option value="0" selected>111 - 219</option><option value="3">≥ 220</option></select>
             <label>Frequência Cardíaca (bpm)</label>
-            <select id="news_fc" class="sel-news">
-                <option value="3">≤ 40</option><option value="1">41 - 50</option><option value="0" selected>51 - 90</option><option value="1">91 - 110</option><option value="2">111 - 130</option><option value="3">≥ 131</option>
-            </select>
-
+            <select id="news_fc" class="sel-news"><option value="3">≤ 40</option><option value="1">41 - 50</option><option value="0" selected>51 - 90</option><option value="1">91 - 110</option><option value="2">111 - 130</option><option value="3">≥ 131</option></select>
             <label>Nível de Consciência</label>
-            <select id="news_avpu" class="sel-news">
-                <option value="0" selected>Alerta (A)</option><option value="3">Confusão nova, Responde à Voz (V), Dor (P) ou Irresponsivo (U)</option>
-            </select>
-
+            <select id="news_avpu" class="sel-news"><option value="0" selected>Alerta (A)</option><option value="3">Confusão nova, Responde à Voz (V), Dor (P) ou Irresponsivo (U)</option></select>
             <label>Temperatura (ºC)</label>
-            <select id="news_temp" class="sel-news">
-                <option value="3">≤ 35.0</option><option value="1">35.1 - 36.0</option><option value="0" selected>36.1 - 38.0</option><option value="1">38.1 - 39.0</option><option value="2">≥ 39.1</option>
-            </select>
-
+            <select id="news_temp" class="sel-news"><option value="3">≤ 35.0</option><option value="1">35.1 - 36.0</option><option value="0" selected>36.1 - 38.0</option><option value="1">38.1 - 39.0</option><option value="2">≥ 39.1</option></select>
             <button class="btn-gerar" style="background-color: #c0392b; padding: 12px; margin-top: 16px;" onclick="calcularNEWS()">Calcular NEWS</button>
             <div id="res_news" class="resultado-calc" style="background-color: #fdedec; color: #c0392b;"></div>
         </div>
@@ -294,28 +289,16 @@
         <div class="card">
             <h2>Escore GRACE (SCA)</h2>
             <p style="font-size: 13px; color: #666;">Mortalidade intra-hospitalar.</p>
-            
-            <label>Idade</label>
-            <select id="grace_idade" class="sel-grace"><option value="0">< 30</option><option value="8">30-39</option><option value="25">40-49</option><option value="41">50-59</option><option value="58" selected>60-69</option><option value="75">70-79</option><option value="91">80-89</option><option value="100">≥ 90</option></select>
-            
-            <label>Frequência Cardíaca (bpm)</label>
-            <select id="grace_fc" class="sel-grace"><option value="0">< 50</option><option value="3">50-69</option><option value="9" selected>70-89</option><option value="15">90-109</option><option value="24">110-149</option><option value="38">150-199</option><option value="46">≥ 200</option></select>
-            
-            <label>PA Sistólica (mmHg)</label>
-            <select id="grace_pas" class="sel-grace"><option value="58">< 80</option><option value="53">80-99</option><option value="43">100-119</option><option value="34" selected>120-139</option><option value="24">140-159</option><option value="10">160-199</option><option value="0">≥ 200</option></select>
-            
-            <label>Creatinina (mg/dL)</label>
-            <select id="grace_cr" class="sel-grace"><option value="1">0 - 0.39</option><option value="4" selected>0.4 - 0.79</option><option value="7">0.8 - 1.19</option><option value="10">1.2 - 1.59</option><option value="13">1.6 - 1.99</option><option value="21">2.0 - 3.99</option><option value="28">≥ 4.0</option></select>
-            
-            <label>Classe Killip</label>
-            <select id="grace_killip" class="sel-grace"><option value="0" selected>I (Sem ICC)</option><option value="20">II (B3, estertores basais)</option><option value="39">III (Edema Agudo de Pulmão)</option><option value="59">IV (Choque Cardiogênico)</option></select>
-            
+            <label>Idade</label><select id="grace_idade" class="sel-grace"><option value="0">< 30</option><option value="8">30-39</option><option value="25">40-49</option><option value="41">50-59</option><option value="58" selected>60-69</option><option value="75">70-79</option><option value="91">80-89</option><option value="100">≥ 90</option></select>
+            <label>Frequência Cardíaca (bpm)</label><select id="grace_fc" class="sel-grace"><option value="0">< 50</option><option value="3">50-69</option><option value="9" selected>70-89</option><option value="15">90-109</option><option value="24">110-149</option><option value="38">150-199</option><option value="46">≥ 200</option></select>
+            <label>PA Sistólica (mmHg)</label><select id="grace_pas" class="sel-grace"><option value="58">< 80</option><option value="53">80-99</option><option value="43">100-119</option><option value="34" selected>120-139</option><option value="24">140-159</option><option value="10">160-199</option><option value="0">≥ 200</option></select>
+            <label>Creatinina (mg/dL)</label><select id="grace_cr" class="sel-grace"><option value="1">0 - 0.39</option><option value="4" selected>0.4 - 0.79</option><option value="7">0.8 - 1.19</option><option value="10">1.2 - 1.59</option><option value="13">1.6 - 1.99</option><option value="21">2.0 - 3.99</option><option value="28">≥ 4.0</option></select>
+            <label>Classe Killip</label><select id="grace_killip" class="sel-grace"><option value="0" selected>I (Sem ICC)</option><option value="20">II (B3, estertores basais)</option><option value="39">III (Edema Agudo de Pulmão)</option><option value="59">IV (Choque Cardiogênico)</option></select>
             <div style="display:flex; flex-direction:column; gap:8px; margin-top: 12px;">
                 <label style="font-weight:normal; margin:0;"><input type="checkbox" class="cb-grace" value="39"> Parada Cardíaca na Admissão</label>
                 <label style="font-weight:normal; margin:0;"><input type="checkbox" class="cb-grace" value="28"> Desvio do segmento ST</label>
                 <label style="font-weight:normal; margin:0;"><input type="checkbox" class="cb-grace" value="14"> Marcadores de necrose miocárdica elevados</label>
             </div>
-
             <button class="btn-gerar" style="background-color: #c0392b; padding: 12px; margin-top: 16px;" onclick="calcularGRACE()">Calcular GRACE</button>
             <div id="res_grace" class="resultado-calc" style="background-color: #fdedec; color: #c0392b;"></div>
         </div>
@@ -341,26 +324,17 @@
     <div id="e-child" class="screen">
         <div class="card">
             <h2>Escore Child-Pugh (Cirrose)</h2>
-            <label>Bilirrubina Total (mg/dL)</label>
-            <select id="child_bili" class="sel-child"><option value="1">< 2</option><option value="2">2 - 3</option><option value="3">> 3</option></select>
-            
-            <label>Albumina (g/dL)</label>
-            <select id="child_alb" class="sel-child"><option value="1">> 3.5</option><option value="2">2.8 - 3.5</option><option value="3">< 2.8</option></select>
-            
-            <label>RNI (INR)</label>
-            <select id="child_inr" class="sel-child"><option value="1">< 1.7</option><option value="2">1.7 - 2.3</option><option value="3">> 2.3</option></select>
-            
-            <label>Ascite</label>
-            <select id="child_ascite" class="sel-child"><option value="1">Ausente</option><option value="2">Leve / Moderada</option><option value="3">Grave / Refratária</option></select>
-            
-            <label>Encefalopatia</label>
-            <select id="child_encef" class="sel-child"><option value="1">Ausente</option><option value="2">Grau I - II</option><option value="3">Grau III - IV</option></select>
-            
+            <label>Bilirrubina Total (mg/dL)</label><select id="child_bili" class="sel-child"><option value="1">< 2</option><option value="2">2 - 3</option><option value="3">> 3</option></select>
+            <label>Albumina (g/dL)</label><select id="child_alb" class="sel-child"><option value="1">> 3.5</option><option value="2">2.8 - 3.5</option><option value="3">< 2.8</option></select>
+            <label>RNI (INR)</label><select id="child_inr" class="sel-child"><option value="1">< 1.7</option><option value="2">1.7 - 2.3</option><option value="3">> 2.3</option></select>
+            <label>Ascite</label><select id="child_ascite" class="sel-child"><option value="1">Ausente</option><option value="2">Leve / Moderada</option><option value="3">Grave / Refratária</option></select>
+            <label>Encefalopatia</label><select id="child_encef" class="sel-child"><option value="1">Ausente</option><option value="2">Grau I - II</option><option value="3">Grau III - IV</option></select>
             <button class="btn-gerar" style="background-color: #c0392b; padding: 12px; margin-top: 16px;" onclick="calcularChild()">Calcular Child-Pugh</button>
             <div id="res_child" class="resultado-calc" style="background-color: #fdedec; color: #c0392b;"></div>
         </div>
     </div>
-        <div id="e-nihss" class="screen">
+    
+    <div id="e-nihss" class="screen">
         <div class="card">
             <h2>Escore NIHSS (AVC Isquêmico)</h2>
             <label>1a. Nível de Consciência</label><select id="n_1a" class="sel-nihss"><option value="0">0 - Alerta</option><option value="1">1 - Sonolento, mas desperta</option><option value="2">2 - Torporoso</option><option value="3">3 - Coma</option></select>
@@ -376,7 +350,6 @@
             <label>9. Linguagem (Afasia)</label><select id="n_9" class="sel-nihss"><option value="0">0 - Normal</option><option value="1">1 - Afasia leve a moderada</option><option value="2">2 - Afasia severa</option><option value="3">3 - Mudo / Afasia global</option></select>
             <label>10. Disartria</label><select id="n_10" class="sel-nihss"><option value="0">0 - Normal</option><option value="1">1 - Leve a moderada</option><option value="2">2 - Severa (ininteligível)</option></select>
             <label>11. Extinção / Negligência</label><select id="n_11" class="sel-nihss"><option value="0">0 - Ausente</option><option value="1">1 - Parcial (1 modalidade)</option><option value="2">2 - Completa (> 1 modalidade)</option></select>
-            
             <button class="btn-gerar" style="background-color: #c0392b; padding: 12px; margin-top: 16px;" onclick="calcularNIHSS()">Calcular NIHSS</button>
             <div id="res_nihss" class="resultado-calc" style="background-color: #fdedec; color: #c0392b;"></div>
         </div>
@@ -386,19 +359,10 @@
         <div class="card">
             <h2>Glasgow-Blatchford (HDA)</h2>
             <p style="font-size: 13px; color: #666;">Avaliação de risco na Hemorragia Digestiva Alta.</p>
-            
-            <label>Ureia (mg/dL)</label>
-            <select id="gb_ureia" class="sel-gb"><option value="0">< 39</option><option value="2">39 - 47.9</option><option value="3">48 - 59.9</option><option value="4">60 - 149.9</option><option value="6">≥ 150</option></select>
-            
-            <label>Hemoglobina Homens (g/dL)</label>
-            <select id="gb_hb_m" class="sel-gb"><option value="0">≥ 13.0 ou N/A</option><option value="1">12.0 - 12.9</option><option value="3">10.0 - 11.9</option><option value="6">< 10.0</option></select>
-
-            <label>Hemoglobina Mulheres (g/dL)</label>
-            <select id="gb_hb_f" class="sel-gb"><option value="0">≥ 12.0 ou N/A</option><option value="1">10.0 - 11.9</option><option value="6">< 10.0</option></select>
-
-            <label>PA Sistólica (mmHg)</label>
-            <select id="gb_pas" class="sel-gb"><option value="0">≥ 110</option><option value="1">100 - 109</option><option value="2">90 - 99</option><option value="3">< 90</option></select>
-            
+            <label>Ureia (mg/dL)</label><select id="gb_ureia" class="sel-gb"><option value="0">< 39</option><option value="2">39 - 47.9</option><option value="3">48 - 59.9</option><option value="4">60 - 149.9</option><option value="6">≥ 150</option></select>
+            <label>Hemoglobina Homens (g/dL)</label><select id="gb_hb_m" class="sel-gb"><option value="0">≥ 13.0 ou N/A</option><option value="1">12.0 - 12.9</option><option value="3">10.0 - 11.9</option><option value="6">< 10.0</option></select>
+            <label>Hemoglobina Mulheres (g/dL)</label><select id="gb_hb_f" class="sel-gb"><option value="0">≥ 12.0 ou N/A</option><option value="1">10.0 - 11.9</option><option value="6">< 10.0</option></select>
+            <label>PA Sistólica (mmHg)</label><select id="gb_pas" class="sel-gb"><option value="0">≥ 110</option><option value="1">100 - 109</option><option value="2">90 - 99</option><option value="3">< 90</option></select>
             <label>Outros Fatores (Marque se presentes)</label>
             <div style="display:flex; flex-direction:column; gap:8px;">
                 <label style="font-weight:normal; margin:0;"><input type="checkbox" class="cb-gb" value="1"> Pulso ≥ 100 bpm (+1)</label>
@@ -407,7 +371,6 @@
                 <label style="font-weight:normal; margin:0;"><input type="checkbox" class="cb-gb" value="2"> Hepatopatia conhecida (+2)</label>
                 <label style="font-weight:normal; margin:0;"><input type="checkbox" class="cb-gb" value="2"> Insuficiência Cardíaca conhecida (+2)</label>
             </div>
-
             <button class="btn-gerar" style="background-color: #c0392b; padding: 12px; margin-top: 16px;" onclick="calcularBlatchford()">Calcular GBS</button>
             <div id="res_blatchford" class="resultado-calc" style="background-color: #fdedec; color: #c0392b;"></div>
         </div>
@@ -417,7 +380,6 @@
         <div class="card">
             <h2>APACHE II (UTI)</h2>
             <p style="font-size: 13px; color: #666;">Use os piores valores das primeiras 24h na UTI.</p>
-            
             <label>Idade (Anos)</label><select id="ap_idade" class="sel-ap"><option value="0">≤ 44</option><option value="2">45 - 54</option><option value="3">55 - 64</option><option value="5">65 - 74</option><option value="6">≥ 75</option></select>
             <label>Temperatura (ºC)</label><select id="ap_temp" class="sel-ap"><option value="4">≥ 41.0</option><option value="3">39.0 - 40.9</option><option value="1">38.5 - 38.9</option><option value="0" selected>36.0 - 38.4</option><option value="1">34.0 - 35.9</option><option value="2">32.0 - 33.9</option><option value="3">30.0 - 31.9</option><option value="4">≤ 29.9</option></select>
             <label>PAM (mmHg)</label><select id="ap_pam" class="sel-ap"><option value="4">≥ 160</option><option value="3">130 - 159</option><option value="2">110 - 129</option><option value="0" selected>70 - 109</option><option value="2">50 - 69</option><option value="4">≤ 49</option></select>
@@ -433,7 +395,6 @@
             <label>Leucócitos (x10³/µL)</label><select id="ap_leuco" class="sel-ap"><option value="4">≥ 40</option><option value="2">20 - 39.9</option><option value="1">15 - 19.9</option><option value="0" selected>3 - 14.9</option><option value="2">1 - 2.9</option><option value="4">< 1</option></select>
             <label>Glasgow (Pontos a subtrair)</label><select id="ap_gcs" class="sel-ap"><option value="0">15</option><option value="1">14</option><option value="2">13</option><option value="3">12</option><option value="4">11</option><option value="5">10</option><option value="6">9</option><option value="7">8</option><option value="8">7</option><option value="9">6</option><option value="10">5</option><option value="11">4</option><option value="12">3</option></select>
             <label>Comorbidades Crônicas e Admissão</label><select id="ap_cronico" class="sel-ap"><option value="0">Nenhuma ou Pós-Op Eletivo</option><option value="2">Histórico crônico + Pós-Op Eletivo</option><option value="5">Histórico crônico + Admissão Clínica ou Pós-Op de Emergência</option></select>
-
             <button class="btn-gerar" style="background-color: #c0392b; padding: 12px; margin-top: 16px;" onclick="calcularAPACHE()">Calcular APACHE II</button>
             <div id="res_apache" class="resultado-calc" style="background-color: #fdedec; color: #c0392b;"></div>
         </div>
@@ -443,27 +404,17 @@
         <div class="card">
             <h2>Escore HEART (Dor Torácica)</h2>
             <p style="font-size: 13px; color: #666;">Avaliação de risco na emergência.</p>
-            
-            <label>História (History)</label>
-            <select id="h_hist" class="sel-heart"><option value="0">Pouco suspeita (0)</option><option value="1">Moderadamente suspeita (1)</option><option value="2">Altamente suspeita (2)</option></select>
-            
-            <label>Eletrocardiograma (ECG)</label>
-            <select id="h_ecg" class="sel-heart"><option value="0">Normal (0)</option><option value="1">Alt. inespecíficas / Repolarização (1)</option><option value="2">Desvio de ST significativo (2)</option></select>
-            
-            <label>Idade (Age)</label>
-            <select id="h_age" class="sel-heart"><option value="0">< 45 anos (0)</option><option value="1">45 - 64 anos (1)</option><option value="2">≥ 65 anos (2)</option></select>
-            
-            <label>Fatores de Risco (Risk factors)</label>
-            <select id="h_risk" class="sel-heart"><option value="0">Nenhum (0)</option><option value="1">1 a 2 fatores de risco (1)</option><option value="2">≥ 3 fatores ou DAC prévia (2)</option></select>
-            
-            <label>Troponina (Troponin)</label>
-            <select id="h_trop" class="sel-heart"><option value="0">≤ Limite Normal (0)</option><option value="1">1 a 3x o Limite Normal (1)</option><option value="2">> 3x o Limite Normal (2)</option></select>
-
+            <label>História (History)</label><select id="h_hist" class="sel-heart"><option value="0">Pouco suspeita (0)</option><option value="1">Moderadamente suspeita (1)</option><option value="2">Altamente suspeita (2)</option></select>
+            <label>Eletrocardiograma (ECG)</label><select id="h_ecg" class="sel-heart"><option value="0">Normal (0)</option><option value="1">Alt. inespecíficas / Repolarização (1)</option><option value="2">Desvio de ST significativo (2)</option></select>
+            <label>Idade (Age)</label><select id="h_age" class="sel-heart"><option value="0">< 45 anos (0)</option><option value="1">45 - 64 anos (1)</option><option value="2">≥ 65 anos (2)</option></select>
+            <label>Fatores de Risco (Risk factors)</label><select id="h_risk" class="sel-heart"><option value="0">Nenhum (0)</option><option value="1">1 a 2 fatores de risco (1)</option><option value="2">≥ 3 fatores ou DAC prévia (2)</option></select>
+            <label>Troponina (Troponin)</label><select id="h_trop" class="sel-heart"><option value="0">≤ Limite Normal (0)</option><option value="1">1 a 3x o Limite Normal (1)</option><option value="2">> 3x o Limite Normal (2)</option></select>
             <button class="btn-gerar" style="background-color: #c0392b; padding: 12px; margin-top: 16px;" onclick="calcularHEART()">Calcular HEART</button>
             <div id="res_heart" class="resultado-calc" style="background-color: #fdedec; color: #c0392b;"></div>
         </div>
     </div>
-         <div id="e-wells" class="screen">
+    
+    <div id="e-wells" class="screen">
         <div class="card">
             <h2>Escore de Wells (Embolia Pulmonar)</h2>
             <div style="display:flex; flex-direction:column; gap:8px;">
@@ -508,19 +459,16 @@
     <div id="e-camicu" class="screen">
         <div class="card">
             <h2>CAM-ICU (Delirium na UTI)</h2>
-            <label>1. Início Agudo ou Curso Flutuante?</label>
-            <select id="cam_1" class="sel-cam"><option value="N">Não</option><option value="S">Sim</option></select>
-            <label>2. Desatenção (Erros no teste de letras/figuras)?</label>
-            <select id="cam_2" class="sel-cam"><option value="N">Não (0-2 erros)</option><option value="S">Sim (> 2 erros)</option></select>
-            <label>3. Nível de Consciência Alterado (RASS ≠ 0)?</label>
-            <select id="cam_3" class="sel-cam"><option value="N">Não (RASS 0)</option><option value="S">Sim (RASS ≠ 0)</option></select>
-            <label>4. Pensamento Desorganizado?</label>
-            <select id="cam_4" class="sel-cam"><option value="N">Não</option><option value="S">Sim</option></select>
+            <label>1. Início Agudo ou Curso Flutuante?</label><select id="cam_1" class="sel-cam"><option value="N">Não</option><option value="S">Sim</option></select>
+            <label>2. Desatenção (Erros no teste de letras/figuras)?</label><select id="cam_2" class="sel-cam"><option value="N">Não (0-2 erros)</option><option value="S">Sim (> 2 erros)</option></select>
+            <label>3. Nível de Consciência Alterado (RASS ≠ 0)?</label><select id="cam_3" class="sel-cam"><option value="N">Não (RASS 0)</option><option value="S">Sim (RASS ≠ 0)</option></select>
+            <label>4. Pensamento Desorganizado?</label><select id="cam_4" class="sel-cam"><option value="N">Não</option><option value="S">Sim</option></select>
             <button class="btn-gerar" style="background-color: #c0392b; padding: 12px; margin-top: 16px;" onclick="calcularCAM()">Avaliar CAM-ICU</button>
             <div id="res_cam" class="resultado-calc" style="background-color: #fdedec; color: #c0392b;"></div>
         </div>
     </div> 
-<div id="e-wellstvp" class="screen">
+    
+    <div id="e-wellstvp" class="screen">
         <div class="card">
             <h2>Escore de Wells (TVP)</h2>
             <div style="display:flex; flex-direction:column; gap:8px;">
@@ -544,143 +492,86 @@
         <div class="card">
             <h2>Débito Cardíaco (Fórmula de Fick)</h2>
             <p style="font-size: 13px; color: #666;">Cálculo invasivo baseado no consumo de oxigênio.</p>
-            
-            <label>Consumo de O2 - VO2 (mL/min)</label>
-            <input type="number" id="fick_vo2" placeholder="Ex: 250 (Padrão/Estimado)">
-            
-            <label>Hemoglobina (g/dL)</label>
-            <input type="number" id="fick_hb" placeholder="Ex: 12.5" step="0.1">
-            
+            <label>Consumo de O2 - VO2 (mL/min)</label><input type="number" id="fick_vo2" placeholder="Ex: 250 (Padrão/Estimado)">
+            <label>Hemoglobina (g/dL)</label><input type="number" id="fick_hb" placeholder="Ex: 12.5" step="0.1">
             <div class="row">
-                <div>
-                    <label>SaO2 - Arterial (%)</label>
-                    <input type="number" id="fick_sao2" placeholder="Ex: 98">
-                </div>
-                <div>
-                    <label>SvO2 - Venosa Mista (%)</label>
-                    <input type="number" id="fick_svo2" placeholder="Ex: 70">
-                </div>
+                <div><label>SaO2 - Arterial (%)</label><input type="number" id="fick_sao2" placeholder="Ex: 98"></div>
+                <div><label>SvO2 - Venosa Mista (%)</label><input type="number" id="fick_svo2" placeholder="Ex: 70"></div>
             </div>
-
             <button class="btn-gerar" style="background-color: #c0392b; padding: 12px; margin-top: 16px;" onclick="calcularFick()">Calcular Débito Cardíaco</button>
             <div id="res_fick" class="resultado-calc" style="background-color: #fdedec; color: #c0392b;"></div>
         </div>
     </div>
                 
     <div id="screen-prescricoes" class="screen">
-        <div style="text-align: center; color: #7f8c8d; margin-top: 10px;">
-            <p>Selecione a categoria de prescrição:</p>
-        </div>
+        <div style="text-align: center; color: #7f8c8d; margin-top: 10px;"><p>Selecione a categoria de prescrição:</p></div>
         <div class="hub-grid">
             <button class="hub-btn" onclick="navegar('screen-kits')" style="background-color: #e67e22;">📦 KITS PADRÃO<br><span style="font-size:11px;font-weight:normal;">Admissão, DPOC, CAD...</span></button>
             <button class="hub-btn" onclick="navegar('screen-infusoes')" style="background-color: #d35400;">💧 INFUSÕES E DOSES<br><span style="font-size:11px;font-weight:normal;">DVA, Sedação, ATB...</span></button>
         </div>
     </div>
 
-    <div id="screen-kits" class="screen">
-        <div class="placeholder-box">
-            <h2>Kits de Prescrição</h2>
-            <p>Área em construção! Aqui ficarão as prescrições prontas para copiar e colar.</p>
-        </div>
-    </div>
+    <div id="screen-kits" class="screen"><div class="placeholder-box"><h2>Kits de Prescrição</h2><p>Área em construção! Aqui ficarão as prescrições prontas para copiar e colar.</p></div></div>
 
-   <div id="screen-infusoes" class="screen">
-       <div class="card" style="background-color: #fff9f5; border: 1px solid #e67e22;">
+    <div id="screen-infusoes" class="screen">
+        <div class="card" style="background-color: #fff9f5; border: 1px solid #e67e22;">
             <h2 style="border-bottom: 2px solid #e67e22; color: #d35400;">Panorama Geral de Infusões</h2>
             <p style="font-size: 13px; color: #666;">Insira o peso para gerar as doses (mL/h) das diluições padrão do seu serviço.</p>
-            
-            <div class="row">
-                <div><label>Peso do Paciente (kg)</label><input type="number" id="panorama_peso" placeholder="Ex: 70" step="0.1"></div>
-            </div>
-            
+            <div class="row"><div><label>Peso do Paciente (kg)</label><input type="number" id="panorama_peso" placeholder="Ex: 70" step="0.1"></div></div>
             <button class="btn-gerar" style="background-color: #e67e22; padding: 12px; margin-top: 16px;" onclick="gerarPanorama()">Gerar Tabela Rápida</button>
-            
             <div id="res_panorama" style="display:none; margin-top: 16px; overflow-x: auto; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
                 <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; min-width: 400px;">
-                    <thead>
-                        <tr style="background-color: #d35400; color: white;">
-                            <th style="padding: 8px; border-radius: 6px 0 0 0;">Medicação (Padrão)</th>
-                            <th style="padding: 8px;">Dose Min</th>
-                            <th style="padding: 8px;">mL/h</th>
-                            <th style="padding: 8px;">Dose Max</th>
-                            <th style="padding: 8px; border-radius: 0 6px 0 0;">mL/h</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tb_panorama">
-                        </tbody>
+                    <thead><tr style="background-color: #d35400; color: white;"><th style="padding: 8px; border-radius: 6px 0 0 0;">Medicação (Padrão)</th><th style="padding: 8px;">Dose Min</th><th style="padding: 8px;">mL/h</th><th style="padding: 8px;">Dose Max</th><th style="padding: 8px; border-radius: 0 6px 0 0;">mL/h</th></tr></thead>
+                    <tbody id="tb_panorama"></tbody>
                 </table>
             </div>
         </div>
        
         <div class="card">
             <h2>DVA: Noradrenalina</h2>
-            
-            <div class="row">
-                <div><label>Peso (kg)</label><input type="number" id="nora_peso" placeholder="kg"></div>
-                <div><label>Dose (mcg/kg/min)</label><input type="number" id="nora_dose" step="0.01" placeholder="Ex: 0.1"></div>
-            </div>
-
+            <div class="row"><div><label>Peso (kg)</label><input type="number" id="nora_peso" placeholder="kg"></div><div><label>Dose (mcg/kg/min)</label><input type="number" id="nora_dose" step="0.01" placeholder="Ex: 0.1"></div></div>
             <label>Tipo de Diluição</label>
             <select id="nora_tipo" onchange="toggleNoraDilu()">
                 <option value="padrao">Padrão: 5 amp + 180ml SF/SG5% (100 mcg/mL)</option>
                 <option value="custom">Personalizada (Ampolas + ML)</option>
             </select>
-
             <div id="nora_custom_fields" style="display:none; background:#f9f9f9; padding:10px; border-radius:8px; margin-top:10px; border:1px dashed #d35400;">
-                <div class="row">
-                    <div><label>Nº Ampolas (4mg/4ml)</label><input type="number" id="nora_amp" value="4"></div>
-                    <div><label>Volume Soros (mL)</label><input type="number" id="nora_vol" value="234"></div>
-                </div>
+                <div class="row"><div><label>Nº Ampolas (4mg/4ml)</label><input type="number" id="nora_amp" value="4"></div><div><label>Volume Soros (mL)</label><input type="number" id="nora_vol" value="234"></div></div>
             </div>
-
             <button class="btn-gerar" style="background-color: #d35400; padding: 12px; margin-top: 16px;" onclick="calcularNoraAvancado()">Calcular Infusão</button>
-            
             <div id="res_nora" class="resultado-calc" style="background-color: #fbeee6; color: #d35400;"></div>
-
-            <div id="info_nora" style="margin-top:15px; font-size:12px; display:none; border-top:1px solid #eee; padding-top:10px;">
-                <p><b>Concentração:</b> <span id="nora_conc_text">--</span> mcg/mL</p>
-                <p><b>Dose Recomendada:</b> 0.05 a 1.0 mcg/kg/min (titulável)</p>
-                <div id="nora_alert" style="font-weight:bold; margin-top:5px; padding:5px; border-radius:4px;"></div>
-            </div>
+            <div id="info_nora" style="margin-top:15px; font-size:12px; display:none; border-top:1px solid #eee; padding-top:10px;"><p><b>Concentração:</b> <span id="nora_conc_text">--</span> mcg/mL</p><p><b>Dose Recomendada:</b> 0.05 a 1.0 mcg/kg/min (titulável)</p><div id="nora_alert" style="font-weight:bold; margin-top:5px; padding:5px; border-radius:4px;"></div></div>
         </div>
        
-       <div class="card">
-           
+        <div class="card">
             <h2>DVA: Dobutamina</h2>
-            <div class="row">
-                <div><label>Peso (kg)</label><input type="number" id="dobuta_peso" placeholder="kg"></div>
-                <div><label>Dose (mcg/kg/min)</label><input type="number" id="dobuta_dose" step="0.1" placeholder="Ex: 5.0"></div>
-            </div>
-
+            <div class="row"><div><label>Peso (kg)</label><input type="number" id="dobuta_peso" placeholder="kg"></div><div><label>Dose (mcg/kg/min)</label><input type="number" id="dobuta_dose" step="0.1" placeholder="Ex: 5.0"></div></div>
             <label>Tipo de Diluição</label>
             <select id="dobuta_tipo" onchange="toggleDobutaDilu()">
                 <option value="padrao">Padrão: 4 amp + 170ml SF (4.000 mcg/mL)</option>
                 <option value="custom">Personalizada (Ampolas + ML)</option>
             </select>
-
             <div id="dobuta_custom_fields" style="display:none; background:#f9f9f9; padding:10px; border-radius:8px; margin-top:10px; border:1px dashed #d35400;">
-                <div class="row">
-                    <div><label>Nº Ampolas (250mg/20ml)</label><input type="number" id="dobuta_amp" value="4"></div>
-                    <div><label>Volume Soros (mL)</label><input type="number" id="dobuta_vol" value="170"></div>
-                </div>
+                <div class="row"><div><label>Nº Ampolas (250mg/20ml)</label><input type="number" id="dobuta_amp" value="4"></div><div><label>Volume Soros (mL)</label><input type="number" id="dobuta_vol" value="170"></div></div>
             </div>
-
             <button class="btn-gerar" style="background-color: #d35400; padding: 12px; margin-top: 16px;" onclick="calcularDobutaAvancado()">Calcular Infusão</button>
-           
             <div id="res_dobuta" class="resultado-calc" style="background-color: #fbeee6; color: #d35400;"></div>
-
-            <div id="info_dobuta" style="margin-top:15px; font-size:12px; display:none; border-top:1px solid #eee; padding-top:10px;">
-                <p><b>Concentração:</b> <span id="dobuta_conc_text">--</span> mcg/mL</p>
-                <p><b>Dose Recomendada:</b> 2.5 a 20.0 mcg/kg/min</p>
-                <div id="dobuta_alert" style="font-weight:bold; margin-top:5px; padding:5px; border-radius:4px;"></div>
-            </div>
+            <div id="info_dobuta" style="margin-top:15px; font-size:12px; display:none; border-top:1px solid #eee; padding-top:10px;"><p><b>Concentração:</b> <span id="dobuta_conc_text">--</span> mcg/mL</p><p><b>Dose Recomendada:</b> 2.5 a 20.0 mcg/kg/min</p><div id="dobuta_alert" style="font-weight:bold; margin-top:5px; padding:5px; border-radius:4px;"></div></div>
         </div>
-        
-        </div>
+    </div>
                 
     <div id="screen-pendencias" class="screen"><div class="placeholder-box"><h2>Pendências</h2><p>Área em construção!</p></div></div>
 
     <div id="screen-evolucao" class="screen">
+        
+        <div class="card" style="border: 2px solid #3498db; background-color: #ebf5fb;">
+            <div class="label-com-mic" style="margin-top: 0;">
+                <h2 style="margin: 0; border: none; padding: 0;">Rascunho de Anamnese</h2>
+                <button type="button" class="btn-mic" onclick="alternarDitado('rascunhoGeral', this)">🎙️ Ditar Geral</button>
+            </div>
+            <textarea id="rascunhoGeral" rows="4" placeholder="Dite a história do paciente livremente aqui e depois copie os trechos para os campos abaixo..."></textarea>
+        </div>
+
         <div class="card">
             <h2>Etapa 1: Identificação</h2>
             <label>Nome do Paciente</label>
@@ -700,8 +591,34 @@
                 <div><label>Data de Internação</label><input type="date" id="dataInternacao"></div>
             </div>
         </div>
-        <div class="card"><h2>Etapa 2: Situação e Contexto</h2><label>Situação (Lista de Problemas)</label><div class="input-com-botao"><input type="text" id="in_problemas" onkeypress="verificarEnter(event, 'complexa', 'problemas')"><button class="btn-add" onclick="addComplexo('problemas')">+</button></div><ul id="ui_problemas" class="lista-itens"></ul><label style="margin-top: 20px;">Contexto</label><textarea id="contexto" rows="4"></textarea></div>
-        <div class="card"><h2>Etapa 3: Histórico</h2><label>História Patológica</label><div class="input-com-botao"><input type="text" id="in_patologica" onkeypress="verificarEnter(event, 'complexa', 'patologica')"><button class="btn-add" onclick="addComplexo('patologica')">+</button></div><ul id="ui_patologica" class="lista-itens"></ul><label>Social</label><div class="input-com-botao"><input type="text" id="in_social" onkeypress="verificarEnter(event, 'complexa', 'social')"><button class="btn-add" onclick="addComplexo('social')">+</button></div><ul id="ui_social" class="lista-itens"></ul><label>Cirúrgica</label><div class="input-com-botao"><input type="text" id="in_cirurgica" onkeypress="verificarEnter(event, 'complexa', 'cirurgica')"><button class="btn-add" onclick="addComplexo('cirurgica')">+</button></div><ul id="ui_cirurgica" class="lista-itens"></ul><label>Familiar</label><div class="input-com-botao"><input type="text" id="in_familiar" onkeypress="verificarEnter(event, 'complexa', 'familiar')"><button class="btn-add" onclick="addComplexo('familiar')">+</button></div><ul id="ui_familiar" class="lista-itens"></ul><label>Meds</label><div class="input-com-botao"><input type="text" id="in_medicamentosa" onkeypress="verificarEnter(event, 'complexa', 'medicamentosa')"><button class="btn-add" onclick="addComplexo('medicamentosa')">+</button></div><ul id="ui_medicamentosa" class="lista-itens"></ul><label>Alergias</label><div class="input-com-botao"><input type="text" id="in_alergias" onkeypress="verificarEnter(event, 'complexa', 'alergias')"><button class="btn-add" onclick="addComplexo('alergias')">+</button></div><ul id="ui_alergias" class="lista-itens"></ul><label>Internações</label><div class="input-com-botao"><input type="text" id="in_internacoes" onkeypress="verificarEnter(event, 'complexa', 'internacoes')"><button class="btn-add" onclick="addComplexo('internacoes')">+</button></div><ul id="ui_internacoes" class="lista-itens"></ul></div>
+        
+        <div class="card">
+            <h2>Etapa 2: Situação e Contexto</h2>
+            <label>Situação (Lista de Problemas)</label>
+            <div class="input-com-botao">
+                <input type="text" id="in_problemas" onkeypress="verificarEnter(event, 'complexa', 'problemas')">
+                <button class="btn-add" onclick="addComplexo('problemas')">+</button>
+            </div>
+            <ul id="ui_problemas" class="lista-itens"></ul>
+            
+            <div class="label-com-mic" style="margin-top: 20px;">
+                <label>Contexto</label>
+                <button type="button" class="btn-mic" onclick="alternarDitado('contexto', this)">🎙️ Ditar</button>
+            </div>
+            <textarea id="contexto" rows="4"></textarea>
+        </div>
+
+        <div class="card">
+            <h2>Etapa 3: Histórico</h2>
+            <label>História Patológica</label><div class="input-com-botao"><input type="text" id="in_patologica" onkeypress="verificarEnter(event, 'complexa', 'patologica')"><button class="btn-add" onclick="addComplexo('patologica')">+</button></div><ul id="ui_patologica" class="lista-itens"></ul>
+            <label>Social</label><div class="input-com-botao"><input type="text" id="in_social" onkeypress="verificarEnter(event, 'complexa', 'social')"><button class="btn-add" onclick="addComplexo('social')">+</button></div><ul id="ui_social" class="lista-itens"></ul>
+            <label>Cirúrgica</label><div class="input-com-botao"><input type="text" id="in_cirurgica" onkeypress="verificarEnter(event, 'complexa', 'cirurgica')"><button class="btn-add" onclick="addComplexo('cirurgica')">+</button></div><ul id="ui_cirurgica" class="lista-itens"></ul>
+            <label>Familiar</label><div class="input-com-botao"><input type="text" id="in_familiar" onkeypress="verificarEnter(event, 'complexa', 'familiar')"><button class="btn-add" onclick="addComplexo('familiar')">+</button></div><ul id="ui_familiar" class="lista-itens"></ul>
+            <label>Meds</label><div class="input-com-botao"><input type="text" id="in_medicamentosa" onkeypress="verificarEnter(event, 'complexa', 'medicamentosa')"><button class="btn-add" onclick="addComplexo('medicamentosa')">+</button></div><ul id="ui_medicamentosa" class="lista-itens"></ul>
+            <label>Alergias</label><div class="input-com-botao"><input type="text" id="in_alergias" onkeypress="verificarEnter(event, 'complexa', 'alergias')"><button class="btn-add" onclick="addComplexo('alergias')">+</button></div><ul id="ui_alergias" class="lista-itens"></ul>
+            <label>Internações</label><div class="input-com-botao"><input type="text" id="in_internacoes" onkeypress="verificarEnter(event, 'complexa', 'internacoes')"><button class="btn-add" onclick="addComplexo('internacoes')">+</button></div><ul id="ui_internacoes" class="lista-itens"></ul>
+        </div>
+        
         <div class="card">
             <h2>Etapa 4: Exames</h2>
             <h3>Imagem</h3><div class="row"><div style="flex: 2;"><label>Exame</label><input type="text" id="img_nome"></div><div style="flex: 1;"><label>Data</label><input type="date" id="img_data"></div></div><label>Laudo</label><div class="input-com-botao"><textarea id="img_laudo" rows="2"></textarea><button class="btn-add" style="height: auto;" onclick="addImagem()">+</button></div><ul id="ui_imagens" class="lista-itens"></ul>
@@ -713,19 +630,116 @@
             <div class="lab-group"><div class="lab-group-title">EAS</div><div class="lab-grid"><div><label>Asp</label><input type="text" id="e_Asp"></div><div><label>Dens</label><input type="text" id="e_Dens"></div><div><label>pH</label><input type="text" id="e_pH"></div><div><label>Prot</label><input type="text" id="e_Prot"></div><div><label>Glic</label><input type="text" id="e_Glic"></div><div><label>Cet</label><input type="text" id="e_Cet"></div><div><label>Bili</label><input type="text" id="e_Bili"></div><div><label>Leuc</label><input type="text" id="e_Leuc"></div><div><label>Hem</label><input type="text" id="e_Hem"></div><div><label>Cil</label><input type="text" id="e_Cil"></div><div><label>Flora</label><input type="text" id="e_Flo"></div><div><label>Cri</label><input type="text" id="e_Cri"></div></div></div>
             <div class="lab-group"><div class="row"><div style="flex: 1;"><label>Rel. P/C</label><input type="text" id="l_RelPC"></div></div><label>Outros Exames</label><div class="input-com-botao"><input type="text" id="l_Outros"><button class="btn-add" onclick="addLaboratorio()">+</button></div></div><ul id="ui_laboratoriais" class="lista-itens"></ul>
         </div>
+        
         <div class="card">
             <h2>Etapa 5: Avaliação Diária e Exame Físico</h2>
-            <label>Avaliação Clínica</label><textarea id="avaliacaoClinica" rows="4"></textarea>
+            <div class="label-com-mic">
+                <label>Avaliação Clínica</label>
+                <button type="button" class="btn-mic" onclick="alternarDitado('avaliacaoClinica', this)">🎙️ Ditar</button>
+            </div>
+            <textarea id="avaliacaoClinica" rows="4"></textarea>
+            
             <h3>Sinais Vitais</h3><div class="lab-grid" style="grid-template-columns: repeat(4, 1fr);"><div><label>FC</label><input type="number" id="sv_FC"></div><div><label>PA</label><input type="text" id="sv_PA"></div><div><label>SpO2</label><input type="number" id="sv_SpO2"></div><div><label>FR</label><input type="number" id="sv_FR"></div><div><label>GLASGOW</label><input type="number" id="sv_Glasgow"></div><div><label>Temp</label><input type="number" id="sv_Temp"></div><div><label>TEC</label><input type="number" id="sv_TEC"></div><div><label>Diur</label><input type="text" id="sv_Diurese"></div></div>
-            <h3>Exame Físico</h3><label>Ect</label><textarea id="ef_Ect" rows="2">Bom estado geral, corado, hidratado, acianótico, anictérico.</textarea><label>AR</label><textarea id="ef_AR" rows="2">MV universalmente audível, sem ruídos adventícios.</textarea><label>ACV</label><textarea id="ef_ACV" rows="2">Ritmo cardíaco regular em 2 tempos, bulhas normofonéticas, sem sopros.</textarea><label>ABD</label><textarea id="ef_ABD" rows="2">Plano, flácido, indolor à palpação, RHA presentes.</textarea><label>MMII</label><textarea id="ef_MMII" rows="2">Sem edemas, panturrilhas livres, pulsos presentes e simétricos.</textarea>
+            
+            <h3>Exame Físico</h3>
+            
+            <div class="label-com-mic"><label>Ect</label><button type="button" class="btn-mic" onclick="alternarDitado('ef_Ect', this)">🎙️ Ditar</button></div>
+            <textarea id="ef_Ect" rows="2">Bom estado geral, corado, hidratado, acianótico, anictérico.</textarea>
+            
+            <div class="label-com-mic"><label>AR</label><button type="button" class="btn-mic" onclick="alternarDitado('ef_AR', this)">🎙️ Ditar</button></div>
+            <textarea id="ef_AR" rows="2">MV universalmente audível, sem ruídos adventícios.</textarea>
+            
+            <div class="label-com-mic"><label>ACV</label><button type="button" class="btn-mic" onclick="alternarDitado('ef_ACV', this)">🎙️ Ditar</button></div>
+            <textarea id="ef_ACV" rows="2">Ritmo cardíaco regular em 2 tempos, bulhas normofonéticas, sem sopros.</textarea>
+            
+            <div class="label-com-mic"><label>ABD</label><button type="button" class="btn-mic" onclick="alternarDitado('ef_ABD', this)">🎙️ Ditar</button></div>
+            <textarea id="ef_ABD" rows="2">Plano, flácido, indolor à palpação, RHA presentes.</textarea>
+            
+            <div class="label-com-mic"><label>MMII</label><button type="button" class="btn-mic" onclick="alternarDitado('ef_MMII', this)">🎙️ Ditar</button></div>
+            <textarea id="ef_MMII" rows="2">Sem edemas, panturrilhas livres, pulsos presentes e simétricos.</textarea>
         </div>
+        
         <div class="card"><h2>Etapa 6: HD</h2><div class="input-com-botao"><input type="text" id="in_hd" onkeypress="verificarEnter(event, 'simples', 'hd')"><button class="btn-add" onclick="addSimples('hd')">+</button></div><ul id="ui_hd" class="lista-itens"></ul></div>
         <div class="card"><h2>Etapa 7: Condutas</h2><div class="input-com-botao"><input type="text" id="in_condutas" onkeypress="verificarEnter(event, 'simples', 'condutas')"><button class="btn-add" onclick="addSimples('condutas')">+</button></div><ul id="ui_condutas" class="lista-itens"></ul></div>
+        
         <button class="btn-gerar" onclick="gerarParecer()">Gerar Texto Completo</button>
         <div id="resultadoArea" class="card"><textarea id="textoFinal" readonly></textarea><button class="btn-copiar" id="btnCopiar" onclick="copiarTexto()">Copiar</button></div>
     </div>
 
     <script>
+        // --- MOTOR DE DITADO POR VOZ (Web Speech API) ---
+        let reconhecimentoAtual = null;
+        let botaoGravandoAtual = null;
+
+        function alternarDitado(idTextarea, botaoAtivador) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("Seu navegador não suporta a digitação por voz. É altamente recomendado o uso do Google Chrome.");
+                return;
+            }
+
+            if (reconhecimentoAtual && botaoGravandoAtual === botaoAtivador) {
+                reconhecimentoAtual.stop();
+                return;
+            }
+
+            if (reconhecimentoAtual) {
+                reconhecimentoAtual.stop();
+            }
+
+            const rec = new SpeechRecognition();
+            rec.lang = 'pt-BR';
+            rec.continuous = true;
+            rec.interimResults = true;
+
+            const campoTexto = document.getElementById(idTextarea);
+            let textoOriginal = campoTexto.value;
+
+            rec.onstart = function() {
+                if (botaoGravandoAtual) botaoGravandoAtual.classList.remove('gravando');
+                botaoGravandoAtual = botaoAtivador;
+                botaoAtivador.classList.add('gravando');
+                botaoAtivador.innerHTML = '🛑 Parar';
+            };
+
+            rec.onresult = function(event) {
+                let textoFinal = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    if (event.results[i].isFinal) {
+                        textoFinal += event.results[i][0].transcript + ' ';
+                    }
+                }
+                if (textoFinal) {
+                    campoTexto.value += (campoTexto.value.trim() !== '' && !campoTexto.value.endsWith(' ') ? ' ' : '') + textoFinal;
+                }
+            };
+
+            rec.onerror = function(event) {
+                console.error("Erro na transcrição: " + event.error);
+                encerrarGravacao(botaoAtivador, idTextarea);
+            };
+
+            rec.onend = function() {
+                encerrarGravacao(botaoAtivador, idTextarea);
+            };
+
+            rec.start();
+            reconhecimentoAtual = rec;
+        }
+
+        function encerrarGravacao(botaoAtivador, idTextarea) {
+            if (botaoGravandoAtual) {
+                botaoGravandoAtual.classList.remove('gravando');
+                if(idTextarea === 'rascunhoGeral') {
+                    botaoGravandoAtual.innerHTML = '🎙️ Ditar Geral';
+                } else {
+                    botaoGravandoAtual.innerHTML = '🎙️ Ditar';
+                }
+            }
+            reconhecimentoAtual = null;
+            botaoGravandoAtual = null;
+        }
+
         // --- NAVEGAÇÃO EXPANDIDA ---
         const rotas = {
             'screen-hub': { titulo: 'Meu Hub Médico', voltarPara: null },
@@ -917,14 +931,12 @@
             let pontos = 0;
             selects.forEach(sel => pontos += parseInt(sel.value));
             
-            // Regra da Lesão Renal Aguda no APACHE (Dobra a pontuação da Creatinina)
             if(document.getElementById('ap_lra').checked) {
                 pontos += parseInt(document.getElementById('ap_cr').value);
             }
             
             const res = document.getElementById('res_apache');
             
-            // Estimativa bruta de mortalidade sem equação longa
             let mort = "< 4%";
             if(pontos >= 5) mort = "8%"; if(pontos >= 10) mort = "15%"; if(pontos >= 15) mort = "24%";
             if(pontos >= 20) mort = "40%"; if(pontos >= 25) mort = "55%"; if(pontos >= 30) mort = "73%"; if(pontos >= 35) mort = "85%";
@@ -989,7 +1001,6 @@
             checkboxes.forEach(cb => pontos += parseFloat(cb.value));
             const res = document.getElementById('res_wellstvp');
             
-            // Diretriz moderna (2 níveis): Alta x Baixa probabilidade
             let probabilidade = pontos >= 2 ? "Alta Probabilidade (TVP Provável).\nIndicação de USG Doppler de MMII." : "Baixa Probabilidade (TVP Improvável).\nConsiderar D-Dímero.";
             res.innerText = `Escore de Wells (TVP): ${pontos} pontos\n${probabilidade}`;
             res.style.display = 'block';
@@ -1007,7 +1018,6 @@
                 res.style.display = 'block'; return;
             }
 
-            // Fórmulas de conteúdo de oxigênio (constante de Hüfner = 1.34)
             const cao2 = 1.34 * hb * saO2;
             const cvo2 = 1.34 * hb * svO2;
             const avDiff = cao2 - cvo2;
@@ -1017,7 +1027,6 @@
                  res.style.display = 'block'; return;
             }
 
-            // DC = VO2 / (CaO2 - CvO2) * 10
             const dc = vo2 / (avDiff * 10);
             
             res.innerText = `Débito Cardíaco: ${dc.toFixed(2)} L/min\n(CaO2: ${cao2.toFixed(1)} mL/dL | CvO2: ${cvo2.toFixed(1)} mL/dL)`;
@@ -1034,16 +1043,9 @@
             const tabela = document.getElementById('tb_panorama');
             tabela.innerHTML = "";
 
-            // Banco de Dados das Diluições Padrão (Vamos ajustar com as suas!)
-           // Banco de Dados das Diluições Padrão (Calibrado com seu serviço)
             const drogas = [
-                // DVA: Noradrenalina (100 mcg/mL)
                 { nome: "Noradrenalina", padrao: "5 amp + 180ml (100 mcg/mL)", min: 0.05, max: 1.0, unidade: "mcg/kg/min", calc: (d,p) => (d * p * 60) / 100 },
-                
-                // DVA: Dobutamina (4.000 mcg/mL)
                 { nome: "Dobutamina", padrao: "4 amp + 170ml (4.000 mcg/mL)", min: 2.5, max: 20.0, unidade: "mcg/kg/min", calc: (d,p) => (d * p * 60) / 4000 },
-                
-                // Sedoanalgesia (Mantendo padrões sugeridos até você informar os seus)
                 { nome: "Fentanil", padrao: "2 amp + 80ml SF (10 mcg/mL)", min: 1.0, max: 3.0, unidade: "mcg/kg/h", calc: (d,p) => (d * p) / 10 },
                 { nome: "Midazolam", padrao: "3 amp + 85ml SF (0.45 mg/mL)", min: 0.05, max: 0.2, unidade: "mg/kg/h", calc: (d,p) => (d * p) / 0.45 },
                 { nome: "Propofol 1%", padrao: "Puro (10 mg/mL)", min: 0.3, max: 3.0, unidade: "mg/kg/h", calc: (d,p) => (d * p) / 10 }
@@ -1079,19 +1081,37 @@
 
             let conc = 0;
             if(tipo === 'padrao') {
-                // Padrão do Serviço: 5 amp (20mg/20ml) em 180ml de Soro = 200ml total
-                // 20.000 mcg / 200 ml = 100 mcg/mL
                 conc = 100; 
             } else {
                 const amps = parseFloat(document.getElementById('nora_amp').value);
                 const volSoro = parseFloat(document.getElementById('nora_vol').value);
-                const totalVol = volSoro + (amps * 4); // Volume soro + volume das ampolas (4ml cada)
-                conc = (amps * 4000) / totalVol; // 4mg = 4000mcg
+                const totalVol = volSoro + (amps * 4);
+                conc = (amps * 4000) / totalVol;
             }
-            function toggleDobutaDilu() {
+
+            const mlh = (dose * peso * 60) / conc;
+            res.innerText = `${mlh.toFixed(1)} mL/h`;
+            res.style.display = 'block';
+            
+            info.style.display = 'block';
+            document.getElementById('nora_conc_text').innerText = conc.toFixed(1);
+
+            if(dose < 0.05) {
+                alertBox.innerText = "⚠️ DOSE MUITO BAIXA: Considere desmame ou checar estabilidade.";
+                alertBox.style.backgroundColor = "#fff3cd"; alertBox.style.color = "#856404";
+            } else if(dose > 1.0) {
+                alertBox.innerText = "🚨 ALERTA: Dose alta (> 1.0 mcg/kg/min). Considerar associar Vasopressina ou Adrenalina.";
+                alertBox.style.backgroundColor = "#f8d7da"; alertBox.style.color = "#721c24";
+            } else {
+                alertBox.innerText = "✅ Dose dentro da faixa terapêutica usual.";
+                alertBox.style.backgroundColor = "#d4edda"; alertBox.style.color = "#155724";
+            }
+        }
+        
+        function toggleDobutaDilu() {
             const tipo = document.getElementById('dobuta_tipo').value;
             document.getElementById('dobuta_custom_fields').style.display = (tipo === 'custom') ? 'block' : 'none';
-            }
+        }
 
         function calcularDobutaAvancado() {
             const peso = parseFloat(document.getElementById('dobuta_peso').value);
@@ -1109,8 +1129,8 @@
             } else {
                 const amps = parseFloat(document.getElementById('dobuta_amp').value);
                 const volSoro = parseFloat(document.getElementById('dobuta_vol').value);
-                const totalVol = volSoro + (amps * 20); // 20ml por ampola
-                conc = (amps * 250000) / totalVol; // 250mg = 250.000mcg
+                const totalVol = volSoro + (amps * 20);
+                conc = (amps * 250000) / totalVol;
             }
 
             const mlh = (dose * peso * 60) / conc;
@@ -1127,29 +1147,6 @@
                 alertBox.style.backgroundColor = "#f8d7da"; alertBox.style.color = "#721c24";
             } else {
                 alertBox.innerText = "✅ Dose dentro da faixa inotrópica usual.";
-                alertBox.style.backgroundColor = "#d4edda"; alertBox.style.color = "#155724";
-            }
-        }
-
-            const mlh = (dose * peso * 60) / conc;
-            
-            // Exibir Resultados
-            res.innerText = `${mlh.toFixed(1)} mL/h`;
-            res.style.display = 'block';
-            
-            // Informações extras
-            info.style.display = 'block';
-            document.getElementById('nora_conc_text').innerText = conc.toFixed(1);
-
-            // Alertas de Segurança (Dose em mcg/kg/min)
-            if(dose < 0.05) {
-                alertBox.innerText = "⚠️ DOSE MUITO BAIXA: Considere desmame ou checar estabilidade.";
-                alertBox.style.backgroundColor = "#fff3cd"; alertBox.style.color = "#856404";
-            } else if(dose > 1.0) {
-                alertBox.innerText = "🚨 ALERTA: Dose alta (> 1.0 mcg/kg/min). Considerar associar Vasopressina ou Adrenalina.";
-                alertBox.style.backgroundColor = "#f8d7da"; alertBox.style.color = "#721c24";
-            } else {
-                alertBox.innerText = "✅ Dose dentro da faixa terapêutica usual.";
                 alertBox.style.backgroundColor = "#d4edda"; alertBox.style.color = "#155724";
             }
         }
@@ -1191,4 +1188,3 @@
     </script>
 </body>
 </html>
-
